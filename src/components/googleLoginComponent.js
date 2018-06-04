@@ -33,7 +33,7 @@ class GoogleLoginComp extends React.Component {
 		return(
 			<div>
                   <GoogleLogin
-                      clientId="169418312728-a2hflbdreim0chmn4aadsjcstn5ps6sf.apps.googleusercontent.com"
+                      clientId="688765204781-kdfmjn8465mhf8m003j3t8p9n3fiifs2.apps.googleusercontent.com"
                       buttonText="Sign in with Google"
                       onSuccess={this.responseGoogle}
                       onFailure={this.failedGoogle}
