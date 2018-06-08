@@ -15,4 +15,5 @@ Installing on local computer:
 2. Run from local folder using Terminal: ( you need npm installed on your computer )
 
 npm install
+
 npm start
