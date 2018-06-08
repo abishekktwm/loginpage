@@ -1,44 +1,72 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {
+	emailAuthenticated
+} from '../modules/reducers'
 
 class UserLogin extends React.Component {
 	constructor(props, context) {
 		super(props, context)
-		this.componentClicked = this.componentClicked.bind(this);
-		this.state = {
-			response: null,
-			handler: props.handler
-		}
+		this.buttonSignInClicked = this.buttonSignInClicked.bind(this);
+		this.state = {}
 	}
 
-	componentClicked(e) {
+	buttonSignInClicked(e) {
+		e.preventDefault()
 		let email = document.getElementById("email").value;
 		let password = document.getElementById("password").value;
-		if(!this.state.response) {
-			this.setState({
-				response: { name: 'not specified', email: email, password: password }
-			}, () => {
-				if(this.state.response) {
-					this.state.handler(this.state.response, "userLogin", true)
-				}
-			})
-		}
+		let response= { name: 'not specified', email: email, password: password , source: "email"}
+		this.props.emailAuthenticated(response)
+
 	}
 
 
 	render() {
 
 		return(
-			<div>
-                      <h1 className="text-center login-title">Sign in</h1>
-                      <form className="form-signin" id="form" onSubmit={this.componentClicked}>
-                      <input  type="email" className="form-control" placeholder="Email" id="email" required autoFocus />
-                      <input type="password" className="form-control" placeholder="Password" id="password" required />
-                      <button className="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
-                      <a href="/" className="pull-right need-help">Need help? </a><span className="clearfix"></span>
-                      <a href="/" className="text-center new-account">Create an account </a>
-                      </form>
-              </div>
+												<div className="row">
+												<div className="col-sm-6">
+													<form method="POST" id="form" onSubmit={this.buttonSignInClicked} >
+														<div className="form-group">
+															<input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Username or Email Address"  required autoFocus/>
+														</div>
+														<div className="form-group">
+															<input type="password" className="form-control" id="password" placeholder="Password" required />
+														</div>
+														<div className="form-group">
+															<div className="container">
+																<div className="row">
+																	<div className="col-sm-4">
+																		<input type="checkbox" className="form-check-input" id="exampleCheck1" />
+																		<label className="text-sm-left small" >Remember me</label>
+																	</div>
+																	<div className="col-sm-6">
+																		<a href="somePlace" className="right">
+																			<label className="text-sm-right small">Forgot your password?</label>
+																		</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<button id="submitButton" type="submit" className="btn btn-primary btn-block">Log In</button>
+													</form>
+												</div>
+											</div>
+
 		)
 	}
 }
-export default UserLogin;
+function mapStateToProps(state) {
+	return { reduxState: state.data};
+}
+
+const mapDispatchToProps = dispatch =>
+	bindActionCreators({
+		emailAuthenticated
+	}, dispatch)
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(UserLogin)

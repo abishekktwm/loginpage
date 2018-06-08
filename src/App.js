@@ -2,40 +2,39 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from './components/loginComponent.js'
 import UserInfo from './components/userInfo.js'
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 class App extends Component {
 
 	constructor(props, context) {
 		super(props, context)
-		this.state = {
-			isLoggedIn: false,
-			response: {}
-		};
-		this.handler = this.handler.bind(this)
+		this.state = {};
 	}
 
-	handler(response, source, home) {
-		if(home === false) {
-			window.location.reload()
-		}
-
-		response.source = source;
-		this.setState({
-			isLoggedIn: home === false ? home : true,
-			response: response
-		})
-	}
 
 	render() {
-		const isLoggedIn = this.state.isLoggedIn;
-		const response = this.state.response;
+		const displayUserInfo = this.props.reduxState.displayUserInfo;
+		const response = this.props.reduxState.userInfo.userFacebookInfo;
 		return(
-			<div className="App">
-      { isLoggedIn ? <UserInfo response={response} handler={this.handler} /> : <Login handler={this.handler} /> }
+			<div className="container-fluid">
+      { displayUserInfo ? <UserInfo response={response}  /> : <Login  /> }
       </div>
 		);
 	}
 }
 
-export default App;
+function mapStateToProps(state) {
+	return { reduxState: state.data};
+}
+
+const mapDispatchToProps = dispatch =>
+	bindActionCreators({
+
+
+	}, dispatch)
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(App)
