@@ -41,6 +41,7 @@ export default(state = initialState, action) => {
 		case GOOGLE_AUTHENTICATED:
 					state.userInfo.isLoggedIn = true;
 					state.displayUserInfo = true;
+					console.log(action.data)
 					newUserInfo = Object.assign({}, state.userInfo, {userGoogleInfo: action.data});
 					return Object.assign({}, state, { userInfo: newUserInfo });
 		case EMAIL_AUTHENTICATED:

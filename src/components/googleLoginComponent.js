@@ -32,7 +32,8 @@ class GoogleLoginComp extends React.Component {
 	}
 
 	failedGoogle(response) {
-		//console.log(response)
+		console.log('goolge auth failed')
+		console.log(response)
 	}
 
 	render() {

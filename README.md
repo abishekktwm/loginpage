@@ -7,7 +7,7 @@ https://github.com/sachkosm/loginpage.git
 Deploying to Herokuapp.com
 git add .
 git add .
-git commit -am "make it better"
+git commit -am "v2"
 git push heroku master
 
 fast run:

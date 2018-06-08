@@ -16,6 +16,7 @@ class App extends Component {
 	render() {
 		const displayUserInfo = this.props.reduxState.displayUserInfo;
 		const response = this.props.reduxState.userInfo.userFacebookInfo;
+		console.log(displayUserInfo)
 		return(
 			<div className="container-fluid">
       { displayUserInfo ? <UserInfo response={response}  /> : <Login  /> }
